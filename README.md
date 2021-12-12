@@ -14,7 +14,6 @@ this includes making detailed report for a period of time about your application
 | :-------------------- | :-----------------------: |
 | [Server](server)      |    Golang Backend API     |
 | [Client](client)      |     React Client App      |
-:-----------------------:---------------------------:
 
 ## Important Notice
 This project is not finished, also this README file is going to be updated regurlarly.
