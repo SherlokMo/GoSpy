@@ -1,6 +1,6 @@
 package infrastructure
 
-func CheckError(err interface{}) {
+func CheckError(err error) {
 	if err != nil {
 		panic(err)
 	}
