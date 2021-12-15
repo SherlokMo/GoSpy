@@ -44,3 +44,12 @@ func HandlePostgre() {
 		panic(err)
 	}
 }
+
+func (db *Pg) Query(statment string, args ...interface{}) *sql.Rows {
+	result, err := db.DB.Query(statment, args...)
+	if err != nil {
+		panic(err)
+	}
+
+	return result
+}
