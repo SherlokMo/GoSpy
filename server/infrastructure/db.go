@@ -27,7 +27,7 @@ func newConnection() (*Pg, error) {
 			return nil, errors.New("cannot connect to postgres")
 		}
 
-		log.Println("Connected to postgres", db)
+		log.Println("Connected to postgres")
 
 		db.SetMaxOpenConns(25)
 		db.SetMaxIdleConns(25)
