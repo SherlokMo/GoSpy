@@ -1,7 +1,9 @@
 package handlers
 
 import (
+	"encoding/json"
 	"gospy/infrastructure"
+	"gospy/models"
 	"gospy/service"
 	"net/http"
 
@@ -9,7 +11,8 @@ import (
 )
 
 func HandleSitesRequest(r *mux.Router) {
-	r.HandleFunc("/sites", getSites)
+	r.HandleFunc("/sites", getSites).Methods("GET")
+	r.HandleFunc("/sites", addSite).Methods("POST")
 }
 
 func getSites(w http.ResponseWriter, r *http.Request) {
@@ -17,4 +20,18 @@ func getSites(w http.ResponseWriter, r *http.Request) {
 	sites := SiteService.FetchAll()
 
 	infrastructure.JsonResponse(sites, w)
+}
+
+func addSite(w http.ResponseWriter, r *http.Request) {
+
+	var site models.Site
+	err := json.NewDecoder(r.Body).Decode(&site)
+	infrastructure.ControllerErrorResponder(err, w, http.StatusBadGateway)
+
+	response := map[string]interface{}{
+		"message": "Your server is added to the list and will be monitored",
+		"site":    site,
+	}
+
+	infrastructure.JsonResponse(response, w)
 }
