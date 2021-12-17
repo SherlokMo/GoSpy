@@ -1,5 +1,11 @@
 package models
 
+import (
+	"encoding/json"
+	"gospy/infrastructure"
+	"net/http"
+)
+
 type Site struct {
 	ID       int64  `json:"id"`
 	Title    string `json:"title"`
@@ -7,6 +13,12 @@ type Site struct {
 	Interval int    `json:"interval"`
 }
 
-func (s Site) Table() string {
-	return "sites"
+func (s Site) ParseJson(w http.ResponseWriter, request *http.Request) interface{} {
+	var site Site
+	err := json.NewDecoder(request.Body).Decode(&site)
+
+	infrastructure.ControllerErrorResponder(err, w, http.StatusBadGateway)
+
+	return site
+
 }
