@@ -2,7 +2,11 @@ package models
 
 type Site struct {
 	ID       int64  `json:"id"`
-	Title    string `json:"name"`
+	Title    string `json:"title"`
 	Url      string `json:"url"`
-	Interval string `json:"interval"`
+	Interval int    `json:"interval"`
+}
+
+func (s Site) Table() string {
+	return "sites"
 }
