@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"encoding/json"
 	"gospy/infrastructure"
 	"gospy/models"
 	"gospy/service"
@@ -24,12 +23,10 @@ func getSites(w http.ResponseWriter, r *http.Request) {
 
 func addSite(w http.ResponseWriter, r *http.Request) {
 
-	var site models.Site
-	err := json.NewDecoder(r.Body).Decode(&site)
-	infrastructure.ControllerErrorResponder(err, w, http.StatusBadGateway)
+	site := models.Site{}.ParseJson(w, r)
 
 	response := map[string]interface{}{
-		"message": "Your server is added to the list and will be monitored",
+		"message": "Your server was added to the list and will be monitored",
 		"site":    site,
 	}
 
