@@ -13,7 +13,7 @@ type Site struct {
 	Interval int    `json:"interval"`
 }
 
-func (s Site) ParseJson(w http.ResponseWriter, request *http.Request) interface{} {
+func (s Site) ParseJson(w http.ResponseWriter, request *http.Request) Site {
 	var site Site
 	err := json.NewDecoder(request.Body).Decode(&site)
 
