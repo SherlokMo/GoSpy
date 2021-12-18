@@ -24,7 +24,8 @@ func getSites(w http.ResponseWriter, r *http.Request) {
 func addSite(w http.ResponseWriter, r *http.Request) {
 
 	site := models.Site{}.ParseJson(w, r)
-
+	SiteService := service.NewSiteService().EmbedSite(&site)
+	SiteService.Save()
 	response := map[string]interface{}{
 		"message": "Your server was added to the list and will be monitored",
 		"site":    site,
