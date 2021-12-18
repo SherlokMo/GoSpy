@@ -6,10 +6,17 @@ import (
 )
 
 type SiteService struct {
+	site *models.Site
 }
 
 func NewSiteService() *SiteService {
 	return &SiteService{}
+}
+
+func (p *SiteService) EmbedSite(s *models.Site) *SiteService {
+	p.site = s
+
+	return p
 }
 
 func (p SiteService) FetchAll() *[]models.Site {
@@ -22,4 +29,9 @@ func (p SiteService) FetchAll() *[]models.Site {
 		sites = append(sites, site)
 	}
 	return &sites
+}
+
+func (p SiteService) Save() {
+	id := infrastructure.Pgsql.Insert("INSERT INTO sites (title, url, interval) VALUES($1, $2, $3)", p.site.Title, p.site.Url, p.site.Interval)
+	p.site.ID = id
 }
