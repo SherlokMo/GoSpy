@@ -20,5 +20,6 @@ func handleRequests() {
 
 func main() {
 	infrastructure.HandlePostgre()
+	infrastructure.HandleWorker()
 	handleRequests()
 }
