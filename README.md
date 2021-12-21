@@ -13,6 +13,7 @@ this includes making detailed report for a period of time about your application
 | Codebase              |      Description          |
 | :-------------------- | :-----------------------: |
 | [Server](server)      |    Golang Backend API     |
+| [Job Scheduler](jobscheduler)      |     Job Scheduler server for scheduling jobs and handling workers      |
 | [Client](client)      |     React Client App      |
 
 ## Important Notice
