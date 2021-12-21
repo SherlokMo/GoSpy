@@ -6,11 +6,28 @@ import (
 )
 
 type SiteService struct {
-	site *models.Site
+	subscribers map[Observer]bool
+	site        *models.Site
 }
 
 func NewSiteService() *SiteService {
 	return &SiteService{}
+}
+func (p *SiteService) register(o Observer) {
+	p.subscribers[o] = true
+}
+
+func (p *SiteService) deregister(o Observer) {
+	delete(p.subscribers, o)
+}
+
+func (p *SiteService) notifyAll() {
+	for o, k := range p.subscribers {
+		_ = k
+		o.update(map[string]interface{}{
+			//pass
+		})
+	}
 }
 
 func (p *SiteService) EmbedSite(s *models.Site) *SiteService {
