@@ -43,9 +43,9 @@ func TraceHttpConnection(method string, url string) (*ResponseTracer, error) {
 	start = time.Now()
 	_, err := http.DefaultTransport.RoundTrip(req)
 	return &ResponseTracer{
-		dnsDone,
-		connectTime,
-		tlsHandShakeTime,
-		totalTime,
+		DNS:          dnsDone,
+		Connection:   connectTime,
+		TLSHandshake: tlsHandShakeTime,
+		TotalTime:    totalTime,
 	}, err
 }
