@@ -12,6 +12,15 @@ services:
     ports:
       - 6379:6379
 
+  asynqadmin:
+    image: hibiken/asynqmon
+    ports:
+      - 8082:8080
+    environment:
+      - REDIS_ADDR=redis:6379
+    depends_on:
+      - redis
+
   pgadmin:
     image: dpage/pgadmin4
     restart: always
