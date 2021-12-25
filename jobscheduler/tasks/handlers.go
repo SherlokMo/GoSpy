@@ -35,7 +35,7 @@ func HandleWebsiteMonitor(c context.Context, t *asynq.Task) error {
 		lookup.Status = req.StatusCode
 	}
 	LookUpService.EmbedModel(&lookup).Save()
-	log.Println("Scanned ", site.Url, "With lookup Id", lookup.ID)
+	log.Println("Scanned", site.Url, "With lookup Id", lookup.ID)
 	queueClient.Client.Enqueue(t, asynq.ProcessIn(time.Duration(site.Interval)*time.Minute))
 	return nil
 }
