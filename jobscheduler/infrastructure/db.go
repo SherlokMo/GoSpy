@@ -22,7 +22,7 @@ func newConnection() (*Pg, error) {
 	if Pgsql == nil {
 		lock.Lock()
 		defer lock.Unlock()
-		db, err := sql.Open("postgres", "postgres://postgres:password@localhost:5432/gospy?sslmode=disable&parseTime=true")
+		db, err := sql.Open("postgres", "postgres://postgres:password@localhost:5432/gospy?sslmode=disable")
 		if err != nil {
 			return nil, errors.New("cannot connect to postgres")
 		}
