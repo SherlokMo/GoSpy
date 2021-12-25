@@ -1,7 +1,11 @@
 package main
 
-import "jobscheduler/scheduler"
+import (
+	"jobscheduler/infrastructure"
+	"jobscheduler/scheduler"
+)
 
 func main() {
+	infrastructure.HandlePostgre()
 	scheduler.RunScheduler()
 }
