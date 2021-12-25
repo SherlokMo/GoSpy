@@ -1,5 +1,5 @@
 package service
 
 type Observer interface {
-	update(payload map[string]interface{})
+	Update(payload map[string]interface{})
 }
