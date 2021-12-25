@@ -1,6 +1,8 @@
 package helpers
 
-import "database/sql"
+import (
+	"database/sql"
+)
 
 func NewNullString(s string) sql.NullString {
 	if len(s) == 0 {
