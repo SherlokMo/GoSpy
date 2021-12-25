@@ -3,6 +3,7 @@ package main
 import (
 	handler "gospy/handlers"
 	"gospy/infrastructure"
+	"gospy/scheduler"
 	"log"
 	"net/http"
 
@@ -20,6 +21,6 @@ func handleRequests() {
 
 func main() {
 	infrastructure.HandlePostgre()
-	infrastructure.HandleWorker()
+	scheduler.HandleWorker()
 	handleRequests()
 }
