@@ -3,7 +3,6 @@ package tasks
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"jobscheduler/infrastructure"
 	"jobscheduler/models"
 	"jobscheduler/queueClient"
@@ -19,7 +18,6 @@ import (
 func HandleWebsiteMonitor(c context.Context, t *asynq.Task) error {
 	var site models.Site
 	err := json.Unmarshal(t.Payload(), &site)
-	fmt.Println(site)
 	infrastructure.CheckError(err)
 	tracer, err := infrastructure.TraceHttpConnection("HEAD", site.Url)
 	LookUpService := service.NewLookUpService()
@@ -37,7 +35,7 @@ func HandleWebsiteMonitor(c context.Context, t *asynq.Task) error {
 		lookup.Status = req.StatusCode
 	}
 	LookUpService.EmbedModel(&lookup).Save()
-	log.Println("Saved", site.Url, "With lookup Id", lookup.ID)
+	log.Println("Scanned ", site.Url, "With lookup Id", lookup.ID)
 	queueClient.Client.Enqueue(t, asynq.ProcessIn(time.Duration(site.Interval)*time.Minute))
 	return nil
 }

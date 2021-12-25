@@ -1,7 +1,6 @@
 package service
 
 import (
-	"fmt"
 	"jobscheduler/helpers"
 	"jobscheduler/infrastructure"
 	"jobscheduler/models"
@@ -17,7 +16,6 @@ func NewLookUpService() *LookUpService {
 
 func (p *LookUpService) EmbedModel(s *models.Lookup) *LookUpService {
 	p.lookup = s
-	fmt.Println(p.lookup)
 	return p
 }
 
