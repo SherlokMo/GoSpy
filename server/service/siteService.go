@@ -11,7 +11,9 @@ type SiteService struct {
 }
 
 func NewSiteService() *SiteService {
-	return &SiteService{}
+	siteservice := &SiteService{subscribers: make(map[Observer]bool)}
+	siteservice.register(&ScheduleSiteMonitoringService{})
+	return siteservice
 }
 func (p *SiteService) register(o Observer) {
 	p.subscribers[o] = true
@@ -24,8 +26,11 @@ func (p *SiteService) deregister(o Observer) {
 func (p *SiteService) notifyAll() {
 	for o, k := range p.subscribers {
 		_ = k
-		o.update(map[string]interface{}{
-			//pass
+		o.Update(map[string]interface{}{
+			"id":       p.site.ID,
+			"title":    p.site.Title,
+			"url":      p.site.Url,
+			"interval": p.site.Interval,
 		})
 	}
 }
@@ -51,4 +56,5 @@ func (p SiteService) FetchAll() *[]models.Site {
 func (p SiteService) Save() {
 	id := infrastructure.Pgsql.Insert("INSERT INTO sites (title, url, interval) VALUES($1, $2, $3)", p.site.Title, p.site.Url, p.site.Interval)
 	p.site.ID = id
+	p.notifyAll()
 }
