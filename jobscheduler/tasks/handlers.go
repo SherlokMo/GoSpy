@@ -6,9 +6,11 @@ import (
 	"fmt"
 	"jobscheduler/infrastructure"
 	"jobscheduler/models"
+	"jobscheduler/queueClient"
 	"jobscheduler/service"
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/hibiken/asynq"
 )
@@ -29,13 +31,13 @@ func HandleWebsiteMonitor(c context.Context, t *asynq.Task) error {
 	}
 	if err != nil {
 		lookup.Warning = err.Error()
-		LookUpService.EmbedModel(&lookup).Save()
-		return nil
 	}
 	req, err := http.Head(site.Url)
-	_ = err
-	lookup.Status = req.StatusCode
+	if err == nil {
+		lookup.Status = req.StatusCode
+	}
 	LookUpService.EmbedModel(&lookup).Save()
 	log.Println("Saved", site.Url, "With lookup Id", lookup.ID)
+	queueClient.Client.Enqueue(t, asynq.ProcessIn(time.Duration(site.Interval)*time.Minute))
 	return nil
 }
