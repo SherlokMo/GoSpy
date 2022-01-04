@@ -2,6 +2,7 @@ package queueClient
 
 import (
 	"log"
+	"os"
 	"sync"
 
 	"github.com/hibiken/asynq"
@@ -12,7 +13,7 @@ var locker = &sync.Mutex{}
 var Client *asynq.Client
 
 var redisConnection = asynq.RedisClientOpt{
-	Addr: "localhost:6379",
+	Addr: os.Getenv("REDIS_ADRESS"),
 }
 
 func HandleClient() {

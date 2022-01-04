@@ -2,13 +2,14 @@ package scheduler
 
 import (
 	"jobscheduler/tasks"
+	"os"
 
 	"github.com/hibiken/asynq"
 )
 
 func RunScheduler() {
 	redisConnection := asynq.RedisClientOpt{
-		Addr: "localhost:6379", // Redis server address
+		Addr: os.Getenv("REDIS_ADRESS"), // Redis server address
 	}
 	worker := asynq.NewServer(redisConnection, asynq.Config{
 		// how many concurrent workers to use.

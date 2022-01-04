@@ -10,6 +10,15 @@ services:
     depends_on:
       - redis
       - postgredb
+      
+  jobscheduler:
+    build: ./jobscheduler
+    environment:
+      - PG_CONN_STRING=${PG_CONN_STRING}
+      - REDIS_ADDR=${REDIS_ADRESS}
+    depends_on:
+      - redis
+      - postgredb
 
   postgredb:
     image: postgres:14
