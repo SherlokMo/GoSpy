@@ -6,6 +6,9 @@ services:
       - .:/usr/src/app
     ports:
       - 8080:8080
+    environment:
+      - PG_CONN_STRING=${PG_CONN_STRING}
+      - REDIS_ADDR=${REDIS_ADRESS}
     depends_on:
       - redis
       - postgredb
@@ -27,7 +30,7 @@ services:
     ports:
       - 8082:8080
     environment:
-      - REDIS_ADDR=redis:6379
+      - REDIS_ADDR=${REDIS_ADRESS}
     depends_on:
       - redis
 
