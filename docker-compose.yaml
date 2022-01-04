@@ -43,4 +43,4 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=password
       - PGADMIN_DEFAULT_EMAIL=admin@admin.com
     depends_on: 
-      - postgres
+      - postgredb
