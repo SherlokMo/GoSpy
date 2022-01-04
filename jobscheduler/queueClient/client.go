@@ -13,7 +13,7 @@ var locker = &sync.Mutex{}
 var Client *asynq.Client
 
 var redisConnection = asynq.RedisClientOpt{
-	Addr: os.Getenv("REDIS_ADRESS"),
+	Addr: os.Getenv("REDIS_ADDR"),
 }
 
 func HandleClient() {

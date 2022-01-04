@@ -9,7 +9,7 @@ import (
 
 func RunScheduler() {
 	redisConnection := asynq.RedisClientOpt{
-		Addr: os.Getenv("REDIS_ADRESS"), // Redis server address
+		Addr: os.Getenv("REDIS_ADDR"), // Redis server address
 	}
 	worker := asynq.NewServer(redisConnection, asynq.Config{
 		// how many concurrent workers to use.
