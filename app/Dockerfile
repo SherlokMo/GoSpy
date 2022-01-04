@@ -1,16 +1,14 @@
 FROM golang:1.16
 
-WORKDIR /usr/src/app
+RUN mkdir -p /app
 
-COPY go.mod .
-COPY go.sum .
+WORKDIR /app
 
-ADD . /usr/src/app/
+ADD . /app
 
-RUN go mod download
+RUN go mod tidy
 
-VOLUME ["/usr/src/app" ]
 
 EXPOSE 8080
 
-CMD ["go run main.go"]
+CMD go run main.go
