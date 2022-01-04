@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"errors"
 	"log"
+	"os"
 	"sync"
 	"time"
 
@@ -22,7 +23,7 @@ func newConnection() (*Pg, error) {
 	if Pgsql == nil {
 		lock.Lock()
 		defer lock.Unlock()
-		db, err := sql.Open("postgres", "postgres://postgres:password@localhost:5432/gospy?sslmode=disable")
+		db, err := sql.Open("postgres", os.Getenv("PG_CONN_STRING"))
 		if err != nil {
 			return nil, errors.New("cannot connect to postgres")
 		}

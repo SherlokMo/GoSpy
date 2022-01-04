@@ -2,6 +2,7 @@ package scheduler
 
 import (
 	"log"
+	"os"
 	"sync"
 
 	"github.com/hibiken/asynq"
@@ -12,7 +13,7 @@ var locker = &sync.Mutex{}
 var Worker *asynq.Client
 
 var redisConnection = asynq.RedisClientOpt{
-	Addr: "localhost:6379",
+	Addr: os.Getenv("REDIS_ADRESS"),
 }
 
 func HandleWorker() {
