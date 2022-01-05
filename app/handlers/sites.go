@@ -18,7 +18,11 @@ func getSites(w http.ResponseWriter, r *http.Request) {
 	SiteService := service.NewSiteService()
 	sites := SiteService.FetchAll()
 
-	infrastructure.JsonResponse(sites, w)
+	response := map[string]interface{}{
+		"sites": sites,
+	}
+
+	infrastructure.JsonResponse(response, w)
 }
 
 func addSite(w http.ResponseWriter, r *http.Request) {
