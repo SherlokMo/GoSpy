@@ -12,9 +12,9 @@ this includes making detailed report for a period of time about your application
 ## Structure
 | Codebase              |      Description          |
 | :-------------------- | :-----------------------: |
-| [Server](server)      |    Golang Backend API     |
+| [Backend](app)      |    Golang Backend API     |
 | [Job Scheduler](jobscheduler)      |     Job Scheduler server for scheduling jobs and handling workers      |
-| [Client](client)      |     React Client App      |
+| [Client]     |     React Client App   [work in progress]   |
 
 ## Important Notice
 This project is not finished, also this README file is going to be updated regurlarly.
