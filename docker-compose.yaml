@@ -21,7 +21,7 @@ services:
       - postgredb
 
   postgredb:
-    image: postgres:14
+    build: ./postgresql
     ports:
       - 5432:5432
     environment:
