@@ -19,9 +19,15 @@ func getByLookup(w http.ResponseWriter, r *http.Request) {
 
 	vars := mux.Vars(r)
 	lookUpService := service.NewLookUpService()
-
+	sitesService := service.NewSiteService()
+	site := sitesService.GetInfo(vars["site"])
 	response := map[string]interface{}{
-		"lookups": lookUpService.FetchScopeSite(vars["site"]),
+		"site": map[string]interface{}{
+			"title": site.Title,
+			"url":   site.Url,
+		},
+		"lookups":      lookUpService.FetchScopeSite(vars["site"]),
+		"average_time": lookUpService.GetAverageScopeSite(vars["site"]),
 	}
 
 	infrastructure.JsonResponse(response, w)
