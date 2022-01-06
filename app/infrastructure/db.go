@@ -55,6 +55,11 @@ func (db *Pg) Query(statment string, args ...interface{}) *sql.Rows {
 	return result
 }
 
+func (db *Pg) QueryRow(statment string, args ...interface{}) *sql.Row {
+	result := db.DB.QueryRow(statment, args...)
+	return result
+}
+
 func (db *Pg) QueryExistance(statment string, args ...interface{}) error {
 	var id int
 	row := db.DB.QueryRow(statment, args...)
