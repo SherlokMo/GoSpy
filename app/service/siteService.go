@@ -41,6 +41,14 @@ func (p *SiteService) EmbedSite(s *models.Site) *SiteService {
 	return p
 }
 
+func (p SiteService) GetInfo(id interface{}) *models.Site {
+	result := infrastructure.Pgsql.QueryRow("SELECT title, url, interval FROM sites WHERE id=$1", id)
+	var site models.Site
+	err := result.Scan(&site.Title, &site.Url, &site.Interval)
+	infrastructure.CheckError(err)
+	return &site
+}
+
 func (p SiteService) FetchAll() *[]models.Site {
 	result := infrastructure.Pgsql.Query("SELECT * FROM sites")
 	var sites []models.Site
