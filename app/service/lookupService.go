@@ -33,7 +33,9 @@ func (p LookUpService) GetAverageScopeSite(site_id string) *models.AverageLookup
 	result := infrastructure.Pgsql.QueryRow("SELECT avg(l.dnslookup) AS avg_dnslookup, avg(l.connection) AS avg_connection, avg(l.tlshandshake) AS avg_tlshandshake FROM (SELECT dnslookup, connection, tlshandshake FROM lookup WHERE site_id=$1 AND warning IS NULL ORDER BY id DESC LIMIT 50) AS l", site_id)
 	var average models.AverageLookup
 	err := result.Scan(&average.DNSLookUp, &average.ConnectionTime, &average.TLSHandshake)
-	infrastructure.CheckError(err)
+	if err != nil {
+		return nil
+	}
 
 	return &average
 }
