@@ -2,19 +2,17 @@ package models
 
 import "time"
 
-type Lookup struct {
-	ID             int64     `json:"id"`
-	Site_id        int64     `json:"site_id"`
+type LookupResponse struct {
 	DNSLookUp      int64     `json:"dnslookuptime"`
 	ConnectionTime int64     `json:"connectiontime"`
 	TLSHandshake   int64     `json:"tlshandshake"`
-	Warning        string    `json:"warning",omitempty`
-	Status         int       `json:"status",omitempty`
+	Warning        string    `json:"warning"`
+	Status         int       `json:"status"`
 	CreatedAt      time.Time `json:"created_at"`
 }
 
 type AverageLookup struct {
-	DNSLookUp      int64 `json:"avg_dnslookup_time"`
-	ConnectionTime int64 `json:"avg_connection_time"`
-	TLSHandshake   int64 `json:"avg_tlshandshake_time"`
+	DNSLookUp      float32 `json:"avg_dnslookup_time"`
+	ConnectionTime float32 `json:"avg_connection_time"`
+	TLSHandshake   float32 `json:"avg_tlshandshake_time"`
 }
