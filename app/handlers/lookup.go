@@ -12,7 +12,7 @@ import (
 func HandleLookupRequest(r *mux.Router) {
 	checkRequester := r.Methods(http.MethodGet).Subrouter()
 	checkRequester.Use(middlewares.SiteExists)
-	checkRequester.HandleFunc("/checks/{site:[0-9]+}", getByLookup).Methods("GET")
+	checkRequester.HandleFunc("/checks/{site:[0-9]+}", getByLookup)
 }
 
 func getByLookup(w http.ResponseWriter, r *http.Request) {
