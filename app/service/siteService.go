@@ -58,3 +58,7 @@ func (p SiteService) Save() {
 	p.site.ID = id
 	p.notifyAll()
 }
+
+func (p SiteService) Exists(id interface{}) error {
+	return infrastructure.Pgsql.QueryExistance("SELECT id FROM sites WHERE id=$1", id)
+}
