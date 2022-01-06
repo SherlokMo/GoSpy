@@ -12,3 +12,9 @@ type Lookup struct {
 	Status         int       `json:"status",omitempty`
 	CreatedAt      time.Time `json:"created_at"`
 }
+
+type AverageLookup struct {
+	DNSLookUp      int64 `json:"avg_dnslookup_time"`
+	ConnectionTime int64 `json:"avg_connection_time"`
+	TLSHandshake   int64 `json:"avg_tlshandshake_time"`
+}
